@@ -14,16 +14,238 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      appointments: {
+        Row: {
+          appointment_date: string
+          appointment_time: string
+          client_name: string
+          client_phone: string
+          client_user_id: string | null
+          created_at: string
+          id: string
+          location_id: string
+          notes: string | null
+          professional_id: string | null
+          service_id: string
+          status: Database["public"]["Enums"]["appointment_status"]
+          updated_at: string
+          whatsapp_sent: boolean
+        }
+        Insert: {
+          appointment_date: string
+          appointment_time: string
+          client_name: string
+          client_phone: string
+          client_user_id?: string | null
+          created_at?: string
+          id?: string
+          location_id: string
+          notes?: string | null
+          professional_id?: string | null
+          service_id: string
+          status?: Database["public"]["Enums"]["appointment_status"]
+          updated_at?: string
+          whatsapp_sent?: boolean
+        }
+        Update: {
+          appointment_date?: string
+          appointment_time?: string
+          client_name?: string
+          client_phone?: string
+          client_user_id?: string | null
+          created_at?: string
+          id?: string
+          location_id?: string
+          notes?: string | null
+          professional_id?: string | null
+          service_id?: string
+          status?: Database["public"]["Enums"]["appointment_status"]
+          updated_at?: string
+          whatsapp_sent?: boolean
+        }
+        Relationships: [
+          {
+            foreignKeyName: "appointments_professional_id_fkey"
+            columns: ["professional_id"]
+            isOneToOne: false
+            referencedRelation: "professionals"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      professional_schedules: {
+        Row: {
+          created_at: string
+          day_of_week: number
+          end_time: string
+          id: string
+          professional_id: string
+          start_time: string
+        }
+        Insert: {
+          created_at?: string
+          day_of_week: number
+          end_time?: string
+          id?: string
+          professional_id: string
+          start_time?: string
+        }
+        Update: {
+          created_at?: string
+          day_of_week?: number
+          end_time?: string
+          id?: string
+          professional_id?: string
+          start_time?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "professional_schedules_professional_id_fkey"
+            columns: ["professional_id"]
+            isOneToOne: false
+            referencedRelation: "professionals"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      professionals: {
+        Row: {
+          created_at: string
+          id: string
+          is_active: boolean
+          location_id: string
+          name: string
+          photo_url: string | null
+          specialties: string[]
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          location_id: string
+          name: string
+          photo_url?: string | null
+          specialties?: string[]
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          location_id?: string
+          name?: string
+          photo_url?: string | null
+          specialties?: string[]
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          created_at: string
+          full_name: string
+          id: string
+          phone: string | null
+          updated_at: string
+        }
+        Insert: {
+          avatar_url?: string | null
+          created_at?: string
+          full_name: string
+          id: string
+          phone?: string | null
+          updated_at?: string
+        }
+        Update: {
+          avatar_url?: string | null
+          created_at?: string
+          full_name?: string
+          id?: string
+          phone?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      reviews: {
+        Row: {
+          appointment_id: string
+          client_name: string
+          comment: string | null
+          created_at: string
+          id: string
+          is_approved: boolean
+          rating: number
+        }
+        Insert: {
+          appointment_id: string
+          client_name: string
+          comment?: string | null
+          created_at?: string
+          id?: string
+          is_approved?: boolean
+          rating: number
+        }
+        Update: {
+          appointment_id?: string
+          client_name?: string
+          comment?: string | null
+          created_at?: string
+          id?: string
+          is_approved?: boolean
+          rating?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "reviews_appointment_id_fkey"
+            columns: ["appointment_id"]
+            isOneToOne: true
+            referencedRelation: "appointments"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      user_roles: {
+        Row: {
+          created_at: string
+          id: string
+          location_id: string | null
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          location_id?: string | null
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          location_id?: string | null
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin" | "secretary" | "professional"
+      appointment_status: "pending" | "confirmed" | "cancelled" | "completed"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +372,9 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin", "secretary", "professional"],
+      appointment_status: ["pending", "confirmed", "cancelled", "completed"],
+    },
   },
 } as const
