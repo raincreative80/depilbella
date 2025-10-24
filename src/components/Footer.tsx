@@ -54,6 +54,9 @@ export const Footer = ({ translations }: FooterProps) => {
               © {currentYear} PelomenosMZ. {footer.rights}.
             </p>
             <div className="flex gap-6">
+              <a href="/admin" className="hover:text-primary-foreground transition-smooth">
+                {footer.admin}
+              </a>
               <button className="hover:text-primary-foreground transition-smooth">
                 {footer.privacy}
               </button>

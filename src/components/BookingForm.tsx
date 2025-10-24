@@ -30,7 +30,7 @@ export const BookingForm = ({ services, locations, translations, language }: Boo
     notes: '',
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     const selectedLocation = locations.find(l => l.id === formData.locationId);
@@ -38,8 +38,24 @@ export const BookingForm = ({ services, locations, translations, language }: Boo
     
     if (!selectedLocation || !selectedService) return;
 
-    // Format WhatsApp message
-    const message = `Novo agendamento PelomenosMZ:%0A
+    try {
+      // Save to database
+      const { supabase } = await import('@/integrations/supabase/client');
+      const { error } = await supabase.from('appointments').insert({
+        client_name: formData.name,
+        client_phone: formData.phone,
+        service_id: formData.serviceId,
+        location_id: formData.locationId,
+        appointment_date: formData.date,
+        appointment_time: formData.time,
+        notes: formData.notes,
+        status: 'pending',
+      });
+
+      if (error) throw error;
+
+      // Format WhatsApp message
+      const message = `Novo agendamento PelomenosMZ:%0A
 Cliente: ${formData.name}%0A
 Telefone: ${formData.phone}%0A
 Serviço: ${selectedService.name[language]}%0A
@@ -47,25 +63,32 @@ Local: ${selectedLocation.name}%0A
 Data/Hora: ${formData.date} às ${formData.time}%0A
 Observações: ${formData.notes || 'Nenhuma'}`;
 
-    // Open WhatsApp (replace with actual number)
-    const whatsappNumber = selectedLocation.whatsapp.replace(/\D/g, '');
-    window.open(`https://wa.me/${whatsappNumber}?text=${message}`, '_blank');
+      // Open WhatsApp
+      const whatsappNumber = selectedLocation.whatsapp.replace(/\D/g, '');
+      window.open(`https://wa.me/${whatsappNumber}?text=${message}`, '_blank');
 
-    toast({
-      title: booking.success,
-      description: 'Você será redirecionado para o WhatsApp.',
-    });
+      toast({
+        title: booking.success,
+        description: 'Você será redirecionado para o WhatsApp.',
+      });
 
-    // Reset form
-    setFormData({
-      name: '',
-      phone: '',
-      locationId: '',
-      serviceId: '',
-      date: '',
-      time: '',
-      notes: '',
-    });
+      // Reset form
+      setFormData({
+        name: '',
+        phone: '',
+        locationId: '',
+        serviceId: '',
+        date: '',
+        time: '',
+        notes: '',
+      });
+    } catch (error) {
+      toast({
+        title: 'Erro ao agendar',
+        description: 'Tente novamente mais tarde.',
+        variant: 'destructive',
+      });
+    }
   };
 
   return (

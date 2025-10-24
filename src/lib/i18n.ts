@@ -48,6 +48,7 @@ export const translations = {
       rights: 'Todos os direitos reservados',
       privacy: 'Política de Privacidade',
       terms: 'Termos de Serviço',
+      admin: 'Painel Admin',
     },
   },
   en: {
@@ -99,6 +100,7 @@ export const translations = {
       rights: 'All rights reserved',
       privacy: 'Privacy Policy',
       terms: 'Terms of Service',
+      admin: 'Admin Panel',
     },
   },
 };
