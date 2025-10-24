@@ -1,0 +1,108 @@
+export const translations = {
+  pt: {
+    nav: {
+      services: 'Serviços',
+      locations: 'Locais',
+      booking: 'Agendar',
+      contact: 'Contacto',
+    },
+    hero: {
+      title: 'Pele suave, confiança renovada',
+      subtitle: 'Tratamentos estéticos profissionais em Maputo',
+      cta: 'Agendar Agora',
+      learnMore: 'Saber Mais',
+    },
+    services: {
+      title: 'Nossos Serviços',
+      subtitle: 'Tratamentos de excelência para sua beleza e bem-estar',
+      priceOnConsultation: 'Preço sob avaliação',
+      duration: 'min',
+    },
+    locations: {
+      title: 'Onde Estamos',
+      subtitle: 'Escolha o local mais conveniente para você',
+      viewOnMap: 'Ver no Google Maps',
+      hours: 'Horário',
+      hoursText: 'Segunda a Sábado, 08h30 - 19h00 | Encerrado aos Domingos',
+      contact: 'Contacto',
+    },
+    booking: {
+      title: 'Agende Seu Tratamento',
+      subtitle: 'Preencha o formulário e receberá confirmação via WhatsApp',
+      name: 'Nome Completo',
+      phone: 'Telefone',
+      location: 'Local',
+      selectLocation: 'Selecione o local',
+      service: 'Serviço',
+      selectService: 'Selecione o serviço',
+      professional: 'Profissional',
+      anyProfessional: 'Qualquer profissional',
+      date: 'Data',
+      time: 'Horário',
+      notes: 'Observações (opcional)',
+      submit: 'Confirmar Agendamento',
+      success: 'Agendamento enviado! Aguarde confirmação via WhatsApp.',
+    },
+    footer: {
+      tagline: 'Sua beleza, nossa prioridade',
+      rights: 'Todos os direitos reservados',
+      privacy: 'Política de Privacidade',
+      terms: 'Termos de Serviço',
+    },
+  },
+  en: {
+    nav: {
+      services: 'Services',
+      locations: 'Locations',
+      booking: 'Book Now',
+      contact: 'Contact',
+    },
+    hero: {
+      title: 'Smooth skin, renewed confidence',
+      subtitle: 'Professional aesthetic treatments in Maputo',
+      cta: 'Book Now',
+      learnMore: 'Learn More',
+    },
+    services: {
+      title: 'Our Services',
+      subtitle: 'Excellence treatments for your beauty and wellness',
+      priceOnConsultation: 'Price upon consultation',
+      duration: 'min',
+    },
+    locations: {
+      title: 'Our Locations',
+      subtitle: 'Choose the most convenient location for you',
+      viewOnMap: 'View on Google Maps',
+      hours: 'Hours',
+      hoursText: 'Monday to Saturday, 08:30 AM - 07:00 PM | Closed on Sundays',
+      contact: 'Contact',
+    },
+    booking: {
+      title: 'Book Your Treatment',
+      subtitle: 'Fill the form and receive confirmation via WhatsApp',
+      name: 'Full Name',
+      phone: 'Phone',
+      location: 'Location',
+      selectLocation: 'Select location',
+      service: 'Service',
+      selectService: 'Select service',
+      professional: 'Professional',
+      anyProfessional: 'Any professional',
+      date: 'Date',
+      time: 'Time',
+      notes: 'Notes (optional)',
+      submit: 'Confirm Booking',
+      success: 'Booking sent! Wait for confirmation via WhatsApp.',
+    },
+    footer: {
+      tagline: 'Your beauty, our priority',
+      rights: 'All rights reserved',
+      privacy: 'Privacy Policy',
+      terms: 'Terms of Service',
+    },
+  },
+};
+
+export type Language = keyof typeof translations;
+
+export const getTranslation = (lang: Language) => translations[lang];
