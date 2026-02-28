@@ -8,44 +8,44 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* PelomenosMZ Luxury Spa Color System */
-    --background: 0 0% 100%; /* Pure white */
-    --foreground: 16 25% 15%; /* Dark brown for text */
+    /* PelomenosMZ Black & White Color System */
+    --background: 0 0% 100%;
+    --foreground: 0 0% 5%;
 
-    --card: 40 20% 96%; /* Cream for cards */
-    --card-foreground: 16 25% 15%;
+    --card: 0 0% 97%;
+    --card-foreground: 0 0% 5%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 16 25% 15%;
+    --popover-foreground: 0 0% 5%;
 
-    --primary: 16 25% 15%; /* Dark brown - main brand */
+    --primary: 0 0% 5%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 16 20% 55%; /* Light brown - accents */
+    --secondary: 0 0% 45%;
     --secondary-foreground: 0 0% 100%;
 
-    --muted: 40 20% 96%; /* Cream - subtle backgrounds */
-    --muted-foreground: 16 15% 40%;
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 40%;
 
-    --accent: 40 30% 92%; /* Warm cream - highlights */
-    --accent-foreground: 16 25% 15%;
+    --accent: 0 0% 93%;
+    --accent-foreground: 0 0% 5%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 40 15% 85%;
-    --input: 40 15% 90%;
-    --ring: 16 20% 55%;
+    --border: 0 0% 85%;
+    --input: 0 0% 90%;
+    --ring: 0 0% 45%;
 
     --radius: 0.75rem;
     
     /* Custom luxury tokens */
-    --gradient-hero: linear-gradient(135deg, hsl(16 25% 15%) 0%, hsl(16 20% 25%) 100%);
-    --gradient-accent: linear-gradient(180deg, hsl(40 30% 92%) 0%, hsl(40 20% 96%) 100%);
-    --gradient-overlay: linear-gradient(180deg, transparent 0%, hsl(16 25% 15% / 0.7) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(0 0% 5%) 0%, hsl(0 0% 15%) 100%);
+    --gradient-accent: linear-gradient(180deg, hsl(0 0% 93%) 0%, hsl(0 0% 97%) 100%);
+    --gradient-overlay: linear-gradient(180deg, transparent 0%, hsl(0 0% 5% / 0.7) 100%);
     
-    --shadow-soft: 0 4px 20px hsl(16 25% 15% / 0.08);
-    --shadow-hover: 0 8px 30px hsl(16 25% 15% / 0.15);
+    --shadow-soft: 0 4px 20px hsl(0 0% 0% / 0.08);
+    --shadow-hover: 0 8px 30px hsl(0 0% 0% / 0.15);
     
     --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 
@@ -67,36 +67,36 @@ All colors MUST be HSL.
   }
 
   .dark {
-    --background: 16 25% 8%;
-    --foreground: 40 20% 96%;
+    --background: 0 0% 5%;
+    --foreground: 0 0% 96%;
 
-    --card: 16 20% 12%;
-    --card-foreground: 40 20% 96%;
+    --card: 0 0% 10%;
+    --card-foreground: 0 0% 96%;
 
-    --popover: 16 20% 12%;
-    --popover-foreground: 40 20% 96%;
+    --popover: 0 0% 10%;
+    --popover-foreground: 0 0% 96%;
 
-    --primary: 40 20% 96%;
-    --primary-foreground: 16 25% 15%;
+    --primary: 0 0% 96%;
+    --primary-foreground: 0 0% 5%;
 
-    --secondary: 16 20% 25%;
-    --secondary-foreground: 40 20% 96%;
+    --secondary: 0 0% 20%;
+    --secondary-foreground: 0 0% 96%;
 
-    --muted: 16 15% 20%;
-    --muted-foreground: 40 15% 65%;
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 65%;
 
-    --accent: 16 20% 18%;
-    --accent-foreground: 40 20% 96%;
+    --accent: 0 0% 18%;
+    --accent-foreground: 0 0% 96%;
 
     --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 40 20% 96%;
+    --destructive-foreground: 0 0% 96%;
 
-    --border: 16 15% 25%;
-    --input: 16 15% 25%;
-    --ring: 16 20% 55%;
+    --border: 0 0% 20%;
+    --input: 0 0% 20%;
+    --ring: 0 0% 55%;
     
-    --gradient-hero: linear-gradient(135deg, hsl(16 25% 8%) 0%, hsl(16 20% 15%) 100%);
-    --gradient-accent: linear-gradient(180deg, hsl(16 20% 18%) 0%, hsl(16 20% 12%) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(0 0% 5%) 0%, hsl(0 0% 12%) 100%);
+    --gradient-accent: linear-gradient(180deg, hsl(0 0% 18%) 0%, hsl(0 0% 10%) 100%);
   }
 }
 
