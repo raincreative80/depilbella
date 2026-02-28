@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { Menu, X, Globe } from 'lucide-react';
+import { Menu, X, Globe, Sun, Moon } from 'lucide-react';
+import { useTheme } from '@/hooks/use-theme';
 import { Language } from '@/lib/i18n';
 
 interface HeaderProps {
@@ -11,6 +12,7 @@ interface HeaderProps {
 
 export const Header = ({ language, setLanguage, translations }: HeaderProps) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { theme, toggleTheme } = useTheme();
   const { nav } = translations;
 
   const scrollToSection = (id: string) => {
@@ -51,7 +53,15 @@ export const Header = ({ language, setLanguage, translations }: HeaderProps) => 
             </button>
           </nav>
 
-          <div className="hidden md:flex items-center gap-4">
+          <div className="hidden md:flex items-center gap-2">
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={toggleTheme}
+              aria-label="Toggle theme"
+            >
+              {theme === 'light' ? <Moon className="w-4 h-4" /> : <Sun className="w-4 h-4" />}
+            </Button>
             <Button
               variant="ghost"
               size="sm"
@@ -98,6 +108,13 @@ export const Header = ({ language, setLanguage, translations }: HeaderProps) => 
               {nav.booking}
             </button>
             <div className="pt-4 flex gap-3">
+              <Button
+                variant="outline"
+                size="icon"
+                onClick={toggleTheme}
+              >
+                {theme === 'light' ? <Moon className="w-4 h-4" /> : <Sun className="w-4 h-4" />}
+              </Button>
               <Button
                 variant="outline"
                 className="flex-1"
