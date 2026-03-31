@@ -2,6 +2,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button';
 import { MapPin, ExternalLink, Phone, Clock } from 'lucide-react';
 import { Location } from '@/lib/data';
+import { useScrollReveal } from '@/hooks/useScrollReveal';
 
 interface LocationsProps {
   locations: Location[];
