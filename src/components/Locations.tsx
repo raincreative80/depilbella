@@ -86,18 +86,6 @@ export const Locations = ({ locations, translations }: LocationsProps) => {
         </div>
       </div>
 
-      <style>{`
-        @keyframes fadeInScale {
-          from {
-            opacity: 0;
-            transform: scale(0.95);
-          }
-          to {
-            opacity: 1;
-            transform: scale(1);
-          }
-        }
-      `}</style>
     </section>
   );
 };
