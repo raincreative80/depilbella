@@ -12,10 +12,16 @@ interface LocationsProps {
 export const Locations = ({ locations, translations }: LocationsProps) => {
   const { locations: locationsT } = translations;
 
+  const { ref: headerRef, isVisible: headerVisible } = useScrollReveal();
+  const { ref: gridRef, isVisible: gridVisible } = useScrollReveal({ threshold: 0.1 });
+
   return (
     <section id="locations" className="py-24 bg-background">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
+        <div
+          ref={headerRef}
+          className={`text-center max-w-3xl mx-auto mb-16 space-y-4 transition-all duration-700 ${headerVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+        >
           <h2 className="text-4xl sm:text-5xl font-serif font-bold text-foreground">
             {locationsT.title}
           </h2>
@@ -24,16 +30,12 @@ export const Locations = ({ locations, translations }: LocationsProps) => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+        <div ref={gridRef} className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
           {locations.map((location, index) => (
             <Card
               key={location.id}
-              className="group hover:shadow-hover transition-smooth border-border bg-card"
-              style={{
-                animationDelay: `${index * 100}ms`,
-                opacity: 0,
-                animation: 'fadeInScale 0.6s ease-out forwards',
-              }}
+              className={`group hover:shadow-hover transition-all duration-500 border-border bg-card ${gridVisible ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-6 scale-95'}`}
+              style={{ transitionDelay: `${index * 120}ms` }}
             >
               <CardHeader>
                 <div className="flex items-start justify-between gap-2 mb-3">
