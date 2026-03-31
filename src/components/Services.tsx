@@ -3,6 +3,7 @@ import { Badge } from '@/components/ui/badge';
 import { Clock, Sparkles } from 'lucide-react';
 import { Service } from '@/lib/data';
 import { Language } from '@/lib/i18n';
+import { useScrollReveal } from '@/hooks/useScrollReveal';
 
 interface ServicesProps {
   services: Service[];
@@ -20,10 +21,16 @@ export const Services = ({ services, translations, language }: ServicesProps) =>
     facial: 'bg-muted text-muted-foreground',
   };
 
+  const { ref: headerRef, isVisible: headerVisible } = useScrollReveal();
+  const { ref: gridRef, isVisible: gridVisible } = useScrollReveal({ threshold: 0.05 });
+
   return (
     <section id="services" className="py-24 bg-accent/30">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
+        <div
+          ref={headerRef}
+          className={`text-center max-w-3xl mx-auto mb-16 space-y-4 transition-all duration-700 ${headerVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+        >
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 backdrop-blur-sm">
             <Sparkles className="w-4 h-4 text-primary" />
             <span className="text-sm font-medium text-primary">Tratamentos Premium</span>
@@ -36,16 +43,12 @@ export const Services = ({ services, translations, language }: ServicesProps) =>
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div ref={gridRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {services.map((service, index) => (
             <Card
               key={service.id}
-              className="group hover:shadow-hover transition-smooth border-border bg-card hover:scale-[1.02]"
-              style={{
-                animationDelay: `${index * 50}ms`,
-                opacity: 0,
-                animation: 'fadeInUp 0.6s ease-out forwards',
-              }}
+              className={`group hover:shadow-hover transition-all duration-500 border-border bg-card hover:scale-[1.02] ${gridVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}
+              style={{ transitionDelay: `${index * 80}ms` }}
             >
               <CardHeader>
                 <div className="flex items-start justify-between gap-2 mb-2">
@@ -76,18 +79,6 @@ export const Services = ({ services, translations, language }: ServicesProps) =>
         </div>
       </div>
 
-      <style>{`
-        @keyframes fadeInUp {
-          from {
-            opacity: 0;
-            transform: translateY(20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-      `}</style>
     </section>
   );
 };

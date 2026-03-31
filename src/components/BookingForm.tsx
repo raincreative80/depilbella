@@ -9,6 +9,7 @@ import { Calendar, Send } from 'lucide-react';
 import { Service, Location } from '@/lib/data';
 import { Language } from '@/lib/i18n';
 import { useToast } from '@/hooks/use-toast';
+import { useScrollReveal } from '@/hooks/useScrollReveal';
 
 interface BookingFormProps {
   services: Service[];
@@ -91,10 +92,15 @@ Observações: ${formData.notes || 'Nenhuma'}`;
     }
   };
 
+  const { ref: sectionRef, isVisible } = useScrollReveal({ threshold: 0.1 });
+
   return (
     <section id="booking" className="py-24 gradient-accent">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="max-w-2xl mx-auto">
+        <div
+          ref={sectionRef}
+          className={`max-w-2xl mx-auto transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+        >
           <div className="text-center mb-12 space-y-4">
             <h2 className="text-4xl sm:text-5xl font-serif font-bold text-foreground">
               {booking.title}
