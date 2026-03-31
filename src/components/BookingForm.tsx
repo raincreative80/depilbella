@@ -9,6 +9,7 @@ import { Calendar, Send } from 'lucide-react';
 import { Service, Location } from '@/lib/data';
 import { Language } from '@/lib/i18n';
 import { useToast } from '@/hooks/use-toast';
+import { useScrollReveal } from '@/hooks/useScrollReveal';
 
 interface BookingFormProps {
   services: Service[];
