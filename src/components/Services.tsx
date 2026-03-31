@@ -3,6 +3,7 @@ import { Badge } from '@/components/ui/badge';
 import { Clock, Sparkles } from 'lucide-react';
 import { Service } from '@/lib/data';
 import { Language } from '@/lib/i18n';
+import { useScrollReveal } from '@/hooks/useScrollReveal';
 
 interface ServicesProps {
   services: Service[];
