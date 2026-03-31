@@ -43,16 +43,12 @@ export const Services = ({ services, translations, language }: ServicesProps) =>
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div ref={gridRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {services.map((service, index) => (
             <Card
               key={service.id}
-              className="group hover:shadow-hover transition-smooth border-border bg-card hover:scale-[1.02]"
-              style={{
-                animationDelay: `${index * 50}ms`,
-                opacity: 0,
-                animation: 'fadeInUp 0.6s ease-out forwards',
-              }}
+              className={`group hover:shadow-hover transition-all duration-500 border-border bg-card hover:scale-[1.02] ${gridVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}
+              style={{ transitionDelay: `${index * 80}ms` }}
             >
               <CardHeader>
                 <div className="flex items-start justify-between gap-2 mb-2">
