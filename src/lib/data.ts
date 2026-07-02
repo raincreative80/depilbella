@@ -38,7 +38,10 @@ export const services: Service[] = [
   {
     id: 'tattoo-removal',
     name: { pt: 'Remoção de Tatuagem', en: 'Tattoo Removal' },
-    description: { pt: 'Tecnologia avançada a laser', en: 'Advanced laser technology' },
+    description: {
+      pt: 'Tecnologia avançada a laser. Envie uma imagem da tatuagem para avaliação de preço.',
+      en: 'Advanced laser technology. Send an image of the tattoo for price evaluation.',
+    },
     priceType: 'consultation',
     duration: 45,
     category: 'laser',
