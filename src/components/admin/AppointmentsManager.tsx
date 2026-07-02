@@ -162,6 +162,9 @@ export const AppointmentsManager = ({ user }: { user: AuthUser | null }) => {
                         {appointment.appointment_time}
                       </div>
                     </TableCell>
+                    <TableCell>
+                      <TattooImageCell path={appointment.tattoo_image_path} />
+                    </TableCell>
                     <TableCell>{getStatusBadge(appointment.status)}</TableCell>
                     <TableCell>
                       <Select
