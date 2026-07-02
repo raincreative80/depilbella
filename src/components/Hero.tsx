@@ -1,6 +1,6 @@
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Sparkles } from 'lucide-react';
-import heroImage from '@/assets/hero-spa.jpg';
+import heroVideo from '@/assets/hero.mp4.asset.json';
 
 interface HeroProps {
   translations: any;
@@ -13,11 +13,15 @@ export const Hero = ({ translations, onBookClick, onLearnMoreClick }: HeroProps)
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background Image with Overlay */}
+      {/* Background Video with Overlay */}
       <div className="absolute inset-0">
-        <img
-          src={heroImage}
-          alt="PelomenosMZ Spa"
+        <video
+          src={heroVideo.url}
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="auto"
           className="w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-primary/90 via-primary/70 to-primary/40" />
