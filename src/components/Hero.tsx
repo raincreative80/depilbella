@@ -36,7 +36,7 @@ export const Hero = ({ translations, onBookClick, onLearnMoreClick }: HeroProps)
         <div className="max-w-4xl mx-auto space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-1000">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/90 backdrop-blur-sm border border-border">
             <Sparkles className="w-4 h-4 text-secondary" />
-            <span className="text-sm font-medium text-foreground">SPA Profissional em Maputo</span>
+            <span className="text-sm font-medium text-foreground">Centro Estético Profissional em Maputo</span>
           </div>
 
           <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-serif font-bold text-primary-foreground leading-tight tracking-tight">
