@@ -216,6 +216,27 @@ Observações: ${formData.notes || 'Nenhuma'}${isTattooRemoval ? '%0AImagem da t
                   </Select>
                 </div>
 
+                {isTattooRemoval && (
+                  <div className="space-y-2 rounded-lg border border-secondary/40 bg-secondary/5 p-4">
+                    <Label htmlFor="tattoo-image" className="font-semibold">
+                      Foto da tatuagem para avaliação de preço *
+                    </Label>
+                    <p className="text-xs text-muted-foreground">
+                      Envie uma foto nítida da tatuagem. O preço será avaliado pela nossa equipa.
+                    </p>
+                    <Input
+                      id="tattoo-image"
+                      type="file"
+                      accept="image/*"
+                      required
+                      onChange={(e) => setTattooImage(e.target.files?.[0] ?? null)}
+                    />
+                    {tattooImage && (
+                      <p className="text-xs text-primary">Selecionado: {tattooImage.name}</p>
+                    )}
+                  </div>
+                )}
+
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-2">
                     <Label htmlFor="date">{booking.date}</Label>
