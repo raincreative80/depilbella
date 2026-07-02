@@ -28,6 +28,7 @@ export type Database = {
           professional_id: string | null
           service_id: string
           status: Database["public"]["Enums"]["appointment_status"]
+          tattoo_image_path: string | null
           updated_at: string
           whatsapp_sent: boolean
         }
@@ -44,6 +45,7 @@ export type Database = {
           professional_id?: string | null
           service_id: string
           status?: Database["public"]["Enums"]["appointment_status"]
+          tattoo_image_path?: string | null
           updated_at?: string
           whatsapp_sent?: boolean
         }
@@ -60,6 +62,7 @@ export type Database = {
           professional_id?: string | null
           service_id?: string
           status?: Database["public"]["Enums"]["appointment_status"]
+          tattoo_image_path?: string | null
           updated_at?: string
           whatsapp_sent?: boolean
         }
