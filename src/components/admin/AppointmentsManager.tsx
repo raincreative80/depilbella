@@ -192,3 +192,47 @@ export const AppointmentsManager = ({ user }: { user: AuthUser | null }) => {
     </Card>
   );
 };
+
+const TattooImageCell = ({ path }: { path: string | null }) => {
+  const [url, setUrl] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [open, setOpen] = useState(false);
+
+  const loadUrl = async () => {
+    if (!path || url) return;
+    setLoading(true);
+    const { data, error } = await supabase.storage
+      .from('tattoo-images')
+      .createSignedUrl(path, 3600);
+    if (!error && data) setUrl(data.signedUrl);
+    setLoading(false);
+  };
+
+  if (!path) {
+    return <span className="text-xs text-muted-foreground">—</span>;
+  }
+
+  return (
+    <Dialog open={open} onOpenChange={(o) => { setOpen(o); if (o) loadUrl(); }}>
+      <DialogTrigger asChild>
+        <Button variant="outline" size="sm" className="gap-1">
+          <ImageIcon className="w-3 h-3" />
+          Ver
+        </Button>
+      </DialogTrigger>
+      <DialogContent className="max-w-2xl">
+        <DialogHeader>
+          <DialogTitle>Foto da tatuagem</DialogTitle>
+        </DialogHeader>
+        {loading && <p className="text-sm text-muted-foreground">Carregando…</p>}
+        {url && (
+          <img
+            src={url}
+            alt="Foto da tatuagem enviada pelo cliente"
+            className="w-full h-auto rounded-md border border-border"
+          />
+        )}
+      </DialogContent>
+    </Dialog>
+  );
+};
