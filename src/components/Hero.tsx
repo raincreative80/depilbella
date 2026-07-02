@@ -1,6 +1,8 @@
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Sparkles } from 'lucide-react';
 import heroVideo from '@/assets/hero.mp4.asset.json';
+import heroMobileVideo from '@/assets/hero-mobile.mp4.asset.json';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 interface HeroProps {
   translations: any;
