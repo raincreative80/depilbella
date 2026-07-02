@@ -126,6 +126,7 @@ export const AppointmentsManager = ({ user }: { user: AuthUser | null }) => {
                 <TableHead>Serviço</TableHead>
                 <TableHead>Local</TableHead>
                 <TableHead>Data/Hora</TableHead>
+                <TableHead>Tatuagem</TableHead>
                 <TableHead>Status</TableHead>
                 <TableHead>Ações</TableHead>
               </TableRow>
