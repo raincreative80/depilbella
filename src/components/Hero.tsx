@@ -1,6 +1,8 @@
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Sparkles } from 'lucide-react';
 import heroVideo from '@/assets/hero.mp4.asset.json';
+import heroMobileVideo from '@/assets/hero-mobile.mp4.asset.json';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 interface HeroProps {
   translations: any;
@@ -10,13 +12,15 @@ interface HeroProps {
 
 export const Hero = ({ translations, onBookClick, onLearnMoreClick }: HeroProps) => {
   const { hero } = translations;
+  const isMobile = useIsMobile();
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background Video with Overlay */}
       <div className="absolute inset-0">
         <video
-          src={heroVideo.url}
+          key={isMobile ? 'mobile' : 'desktop'}
+          src={isMobile ? heroMobileVideo.url : heroVideo.url}
           autoPlay
           loop
           muted
