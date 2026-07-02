@@ -8,44 +8,44 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* PelomenosMZ Luxury Spa Color System */
-    --background: 0 0% 100%; /* Pure white */
-    --foreground: 16 25% 15%; /* Dark brown for text */
+    /* PelomenosMZ Luxury Spa Color System — Bold */
+    --background: 40 40% 98%; /* Warm ivory */
+    --foreground: 18 45% 10%; /* Deep espresso for text */
 
-    --card: 40 20% 96%; /* Cream for cards */
-    --card-foreground: 16 25% 15%;
+    --card: 40 35% 94%; /* Rich cream for cards */
+    --card-foreground: 18 45% 10%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 16 25% 15%;
+    --popover-foreground: 18 45% 10%;
 
-    --primary: 16 25% 15%; /* Dark brown - main brand */
-    --primary-foreground: 0 0% 100%;
+    --primary: 18 55% 18%; /* Bold dark brown */
+    --primary-foreground: 40 45% 97%;
 
-    --secondary: 16 20% 55%; /* Light brown - accents */
-    --secondary-foreground: 0 0% 100%;
+    --secondary: 22 60% 45%; /* Vivid caramel */
+    --secondary-foreground: 40 45% 98%;
 
-    --muted: 40 20% 96%; /* Cream - subtle backgrounds */
-    --muted-foreground: 16 15% 40%;
+    --muted: 40 30% 92%;
+    --muted-foreground: 18 25% 30%;
 
-    --accent: 40 30% 92%; /* Warm cream - highlights */
-    --accent-foreground: 16 25% 15%;
+    --accent: 32 70% 55%; /* Warm golden accent */
+    --accent-foreground: 18 45% 10%;
 
-    --destructive: 0 84.2% 60.2%;
+    --destructive: 0 84.2% 55%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 40 15% 85%;
-    --input: 40 15% 90%;
-    --ring: 16 20% 55%;
+    --border: 30 25% 78%;
+    --input: 30 25% 88%;
+    --ring: 22 60% 45%;
 
     --radius: 0.75rem;
     
     /* Custom luxury tokens */
-    --gradient-hero: linear-gradient(135deg, hsl(16 25% 15%) 0%, hsl(16 20% 25%) 100%);
-    --gradient-accent: linear-gradient(180deg, hsl(40 30% 92%) 0%, hsl(40 20% 96%) 100%);
-    --gradient-overlay: linear-gradient(180deg, transparent 0%, hsl(16 25% 15% / 0.7) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(18 55% 12%) 0%, hsl(22 60% 30%) 100%);
+    --gradient-accent: linear-gradient(180deg, hsl(32 70% 55%) 0%, hsl(40 35% 94%) 100%);
+    --gradient-overlay: linear-gradient(180deg, transparent 0%, hsl(18 55% 12% / 0.75) 100%);
     
-    --shadow-soft: 0 4px 20px hsl(16 25% 15% / 0.08);
-    --shadow-hover: 0 8px 30px hsl(16 25% 15% / 0.15);
+    --shadow-soft: 0 4px 20px hsl(18 55% 18% / 0.15);
+    --shadow-hover: 0 12px 40px hsl(22 60% 30% / 0.25);
     
     --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 
