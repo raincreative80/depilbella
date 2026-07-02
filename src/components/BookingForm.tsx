@@ -275,9 +275,9 @@ Observações: ${formData.notes || 'Nenhuma'}${isTattooRemoval ? '%0AImagem da t
                   />
                 </div>
 
-                <Button type="submit" size="lg" className="w-full" variant="hero">
+                <Button type="submit" size="lg" className="w-full" variant="hero" disabled={isSubmitting}>
                   <Send className="w-5 h-5 mr-2" />
-                  {booking.submit}
+                  {isSubmitting ? 'Enviando...' : booking.submit}
                 </Button>
               </form>
             </CardContent>
