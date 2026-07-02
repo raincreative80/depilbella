@@ -5,8 +5,9 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { useToast } from '@/hooks/use-toast';
-import { Calendar, Phone, MapPin, Clock } from 'lucide-react';
+import { Calendar, Phone, MapPin, Clock, Image as ImageIcon } from 'lucide-react';
 import type { AuthUser } from '@/lib/auth';
 import { services, locations } from '@/lib/data';
 
@@ -21,6 +22,7 @@ interface Appointment {
   status: string;
   notes: string;
   created_at: string;
+  tattoo_image_path: string | null;
 }
 
 export const AppointmentsManager = ({ user }: { user: AuthUser | null }) => {
@@ -124,6 +126,7 @@ export const AppointmentsManager = ({ user }: { user: AuthUser | null }) => {
                 <TableHead>Serviço</TableHead>
                 <TableHead>Local</TableHead>
                 <TableHead>Data/Hora</TableHead>
+                <TableHead>Tatuagem</TableHead>
                 <TableHead>Status</TableHead>
                 <TableHead>Ações</TableHead>
               </TableRow>
@@ -159,6 +162,9 @@ export const AppointmentsManager = ({ user }: { user: AuthUser | null }) => {
                         {appointment.appointment_time}
                       </div>
                     </TableCell>
+                    <TableCell>
+                      <TattooImageCell path={appointment.tattoo_image_path} />
+                    </TableCell>
                     <TableCell>{getStatusBadge(appointment.status)}</TableCell>
                     <TableCell>
                       <Select
@@ -184,5 +190,49 @@ export const AppointmentsManager = ({ user }: { user: AuthUser | null }) => {
         )}
       </CardContent>
     </Card>
+  );
+};
+
+const TattooImageCell = ({ path }: { path: string | null }) => {
+  const [url, setUrl] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [open, setOpen] = useState(false);
+
+  const loadUrl = async () => {
+    if (!path || url) return;
+    setLoading(true);
+    const { data, error } = await supabase.storage
+      .from('tattoo-images')
+      .createSignedUrl(path, 3600);
+    if (!error && data) setUrl(data.signedUrl);
+    setLoading(false);
+  };
+
+  if (!path) {
+    return <span className="text-xs text-muted-foreground">—</span>;
+  }
+
+  return (
+    <Dialog open={open} onOpenChange={(o) => { setOpen(o); if (o) loadUrl(); }}>
+      <DialogTrigger asChild>
+        <Button variant="outline" size="sm" className="gap-1">
+          <ImageIcon className="w-3 h-3" />
+          Ver
+        </Button>
+      </DialogTrigger>
+      <DialogContent className="max-w-2xl">
+        <DialogHeader>
+          <DialogTitle>Foto da tatuagem</DialogTitle>
+        </DialogHeader>
+        {loading && <p className="text-sm text-muted-foreground">Carregando…</p>}
+        {url && (
+          <img
+            src={url}
+            alt="Foto da tatuagem enviada pelo cliente"
+            className="w-full h-auto rounded-md border border-border"
+          />
+        )}
+      </DialogContent>
+    </Dialog>
   );
 };

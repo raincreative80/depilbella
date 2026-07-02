@@ -30,18 +30,47 @@ export const BookingForm = ({ services, locations, translations, language }: Boo
     time: '',
     notes: '',
   });
+  const [tattooImage, setTattooImage] = useState<File | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const isTattooRemoval = formData.serviceId === 'tattoo-removal';
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     const selectedLocation = locations.find(l => l.id === formData.locationId);
     const selectedService = services.find(s => s.id === formData.serviceId);
-    
+
     if (!selectedLocation || !selectedService) return;
 
+    if (isTattooRemoval && !tattooImage) {
+      toast({
+        title: 'Imagem obrigatória',
+        description: 'Por favor envie uma imagem da tatuagem para avaliação de preço.',
+        variant: 'destructive',
+      });
+      return;
+    }
+
+    setIsSubmitting(true);
     try {
-      // Save to database
       const { supabase } = await import('@/integrations/supabase/client');
+
+      // Upload tattoo image if applicable
+      let tattooImagePath: string | null = null;
+      if (isTattooRemoval && tattooImage) {
+        const ext = tattooImage.name.split('.').pop() || 'jpg';
+        const filePath = `${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`;
+        const { error: uploadError } = await supabase.storage
+          .from('tattoo-images')
+          .upload(filePath, tattooImage, {
+            contentType: tattooImage.type,
+            upsert: false,
+          });
+        if (uploadError) throw uploadError;
+        tattooImagePath = filePath;
+      }
+
       const { error } = await supabase.from('appointments').insert({
         client_name: formData.name,
         client_phone: formData.phone,
@@ -51,20 +80,19 @@ export const BookingForm = ({ services, locations, translations, language }: Boo
         appointment_time: formData.time,
         notes: formData.notes,
         status: 'pending',
+        tattoo_image_path: tattooImagePath,
       });
 
       if (error) throw error;
 
-      // Format WhatsApp message
       const message = `Novo agendamento PelomenosMZ:%0A
 Cliente: ${formData.name}%0A
 Telefone: ${formData.phone}%0A
 Serviço: ${selectedService.name[language]}%0A
 Local: ${selectedLocation.name}%0A
 Data/Hora: ${formData.date} às ${formData.time}%0A
-Observações: ${formData.notes || 'Nenhuma'}`;
+Observações: ${formData.notes || 'Nenhuma'}${isTattooRemoval ? '%0AImagem da tatuagem enviada para avaliação.' : ''}`;
 
-      // Open WhatsApp
       const whatsappNumber = selectedLocation.whatsapp.replace(/\D/g, '');
       window.open(`https://wa.me/${whatsappNumber}?text=${message}`, '_blank');
 
@@ -73,7 +101,6 @@ Observações: ${formData.notes || 'Nenhuma'}`;
         description: 'Você será redirecionado para o WhatsApp.',
       });
 
-      // Reset form
       setFormData({
         name: '',
         phone: '',
@@ -83,12 +110,16 @@ Observações: ${formData.notes || 'Nenhuma'}`;
         time: '',
         notes: '',
       });
+      setTattooImage(null);
     } catch (error) {
+      console.error(error);
       toast({
         title: 'Erro ao agendar',
         description: 'Tente novamente mais tarde.',
         variant: 'destructive',
       });
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -185,6 +216,27 @@ Observações: ${formData.notes || 'Nenhuma'}`;
                   </Select>
                 </div>
 
+                {isTattooRemoval && (
+                  <div className="space-y-2 rounded-lg border border-secondary/40 bg-secondary/5 p-4">
+                    <Label htmlFor="tattoo-image" className="font-semibold">
+                      Foto da tatuagem para avaliação de preço *
+                    </Label>
+                    <p className="text-xs text-muted-foreground">
+                      Envie uma foto nítida da tatuagem. O preço será avaliado pela nossa equipa.
+                    </p>
+                    <Input
+                      id="tattoo-image"
+                      type="file"
+                      accept="image/*"
+                      required
+                      onChange={(e) => setTattooImage(e.target.files?.[0] ?? null)}
+                    />
+                    {tattooImage && (
+                      <p className="text-xs text-primary">Selecionado: {tattooImage.name}</p>
+                    )}
+                  </div>
+                )}
+
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-2">
                     <Label htmlFor="date">{booking.date}</Label>
@@ -223,9 +275,9 @@ Observações: ${formData.notes || 'Nenhuma'}`;
                   />
                 </div>
 
-                <Button type="submit" size="lg" className="w-full" variant="hero">
+                <Button type="submit" size="lg" className="w-full" variant="hero" disabled={isSubmitting}>
                   <Send className="w-5 h-5 mr-2" />
-                  {booking.submit}
+                  {isSubmitting ? 'Enviando...' : booking.submit}
                 </Button>
               </form>
             </CardContent>
