@@ -5,8 +5,9 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { useToast } from '@/hooks/use-toast';
-import { Calendar, Phone, MapPin, Clock } from 'lucide-react';
+import { Calendar, Phone, MapPin, Clock, Image as ImageIcon } from 'lucide-react';
 import type { AuthUser } from '@/lib/auth';
 import { services, locations } from '@/lib/data';
 
@@ -21,6 +22,7 @@ interface Appointment {
   status: string;
   notes: string;
   created_at: string;
+  tattoo_image_path: string | null;
 }
 
 export const AppointmentsManager = ({ user }: { user: AuthUser | null }) => {
