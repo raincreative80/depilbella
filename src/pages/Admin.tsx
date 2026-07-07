@@ -126,11 +126,11 @@ const Admin = () => {
           </TabsList>
 
           <TabsContent value="dashboard">
-            <AdminDashboard user={user} />
+            <AdminDashboard user={user} locationId={selectedLocation} />
           </TabsContent>
 
           <TabsContent value="appointments">
-            <AppointmentsManager user={user} />
+            <AppointmentsManager user={user} locationId={selectedLocation} />
           </TabsContent>
 
           {isAdmin && (
