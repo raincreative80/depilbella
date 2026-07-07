@@ -5,16 +5,19 @@ import { getCurrentUser, signOut, hasRole, type AuthUser } from '@/lib/auth';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { LogOut, Calendar, Users, BarChart3, Settings } from 'lucide-react';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { LogOut, Calendar, Users, BarChart3, Settings, MapPin } from 'lucide-react';
 import { AdminDashboard } from '@/components/admin/AdminDashboard';
 import { AppointmentsManager } from '@/components/admin/AppointmentsManager';
 import { ProfessionalsManager } from '@/components/admin/ProfessionalsManager';
 import { ReviewsManager } from '@/components/admin/ReviewsManager';
+import { locations } from '@/lib/data';
 
 const Admin = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState<AuthUser | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [selectedLocation, setSelectedLocation] = useState<string>('all');
 
   useEffect(() => {
     checkUser();
@@ -72,10 +75,28 @@ const Admin = () => {
               {user?.email} - {isAdmin ? 'Administrador' : 'Secretária'}
             </p>
           </div>
-          <Button onClick={handleSignOut} variant="outline">
-            <LogOut className="w-4 h-4 mr-2" />
-            Sair
-          </Button>
+          <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2">
+              <MapPin className="w-4 h-4 text-muted-foreground" />
+              <Select value={selectedLocation} onValueChange={setSelectedLocation}>
+                <SelectTrigger className="w-[240px]">
+                  <SelectValue placeholder="Selecionar local" />
+                </SelectTrigger>
+                <SelectContent>
+                  {isAdmin && <SelectItem value="all">Todas as localizações</SelectItem>}
+                  {locations.map((loc) => (
+                    <SelectItem key={loc.id} value={loc.id}>
+                      {loc.name}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+            <Button onClick={handleSignOut} variant="outline">
+              <LogOut className="w-4 h-4 mr-2" />
+              Sair
+            </Button>
+          </div>
         </div>
       </header>
 
@@ -105,11 +126,11 @@ const Admin = () => {
           </TabsList>
 
           <TabsContent value="dashboard">
-            <AdminDashboard user={user} />
+            <AdminDashboard user={user} locationId={selectedLocation} />
           </TabsContent>
 
           <TabsContent value="appointments">
-            <AppointmentsManager user={user} />
+            <AppointmentsManager user={user} locationId={selectedLocation} />
           </TabsContent>
 
           {isAdmin && (

@@ -25,7 +25,7 @@ interface Appointment {
   tattoo_image_path: string | null;
 }
 
-export const AppointmentsManager = ({ user }: { user: AuthUser | null }) => {
+export const AppointmentsManager = ({ user, locationId = 'all' }: { user: AuthUser | null; locationId?: string }) => {
   const [appointments, setAppointments] = useState<Appointment[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const { toast } = useToast();
@@ -116,7 +116,9 @@ export const AppointmentsManager = ({ user }: { user: AuthUser | null }) => {
         <CardTitle>Gerenciar Agendamentos</CardTitle>
       </CardHeader>
       <CardContent>
-        {appointments.length === 0 ? (
+        {(() => {
+          const visible = locationId === 'all' ? appointments : appointments.filter((a) => a.location_id === locationId);
+          return visible.length === 0 ? (
           <p className="text-muted-foreground text-center py-8">Nenhum agendamento encontrado</p>
         ) : (
           <Table>
@@ -132,7 +134,7 @@ export const AppointmentsManager = ({ user }: { user: AuthUser | null }) => {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {appointments.map((appointment) => {
+              {visible.map((appointment) => {
                 const service = services.find(s => s.id === appointment.service_id);
                 const location = locations.find(l => l.id === appointment.location_id);
                 
@@ -187,7 +189,8 @@ export const AppointmentsManager = ({ user }: { user: AuthUser | null }) => {
               })}
             </TableBody>
           </Table>
-        )}
+        );
+        })()}
       </CardContent>
     </Card>
   );
