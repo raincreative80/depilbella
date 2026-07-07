@@ -116,7 +116,9 @@ export const AppointmentsManager = ({ user, locationId = 'all' }: { user: AuthUs
         <CardTitle>Gerenciar Agendamentos</CardTitle>
       </CardHeader>
       <CardContent>
-        {appointments.length === 0 ? (
+        {(() => {
+          const visible = locationId === 'all' ? appointments : appointments.filter((a) => a.location_id === locationId);
+          return visible.length === 0 ? (
           <p className="text-muted-foreground text-center py-8">Nenhum agendamento encontrado</p>
         ) : (
           <Table>
