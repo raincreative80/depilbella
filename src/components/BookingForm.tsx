@@ -60,7 +60,7 @@ export const BookingForm = ({ services, locations, translations, language }: Boo
       let tattooImagePath: string | null = null;
       if (isTattooRemoval && tattooImage) {
         const ext = tattooImage.name.split('.').pop() || 'jpg';
-        const filePath = `${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`;
+        const filePath = `bookings/${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`;
         const { error: uploadError } = await supabase.storage
           .from('tattoo-images')
           .upload(filePath, tattooImage, {
