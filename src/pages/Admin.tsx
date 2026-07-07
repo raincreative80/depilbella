@@ -5,11 +5,13 @@ import { getCurrentUser, signOut, hasRole, type AuthUser } from '@/lib/auth';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { LogOut, Calendar, Users, BarChart3, Settings } from 'lucide-react';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { LogOut, Calendar, Users, BarChart3, Settings, MapPin } from 'lucide-react';
 import { AdminDashboard } from '@/components/admin/AdminDashboard';
 import { AppointmentsManager } from '@/components/admin/AppointmentsManager';
 import { ProfessionalsManager } from '@/components/admin/ProfessionalsManager';
 import { ReviewsManager } from '@/components/admin/ReviewsManager';
+import { locations } from '@/lib/data';
 
 const Admin = () => {
   const navigate = useNavigate();
