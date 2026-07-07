@@ -189,7 +189,8 @@ export const AppointmentsManager = ({ user, locationId = 'all' }: { user: AuthUs
               })}
             </TableBody>
           </Table>
-        )}
+        );
+        })()}
       </CardContent>
     </Card>
   );
