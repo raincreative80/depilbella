@@ -25,7 +25,7 @@ interface Appointment {
   tattoo_image_path: string | null;
 }
 
-export const AppointmentsManager = ({ user }: { user: AuthUser | null }) => {
+export const AppointmentsManager = ({ user, locationId = 'all' }: { user: AuthUser | null; locationId?: string }) => {
   const [appointments, setAppointments] = useState<Appointment[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const { toast } = useToast();
