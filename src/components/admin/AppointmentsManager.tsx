@@ -134,7 +134,7 @@ export const AppointmentsManager = ({ user, locationId = 'all' }: { user: AuthUs
               </TableRow>
             </TableHeader>
             <TableBody>
-              {appointments.map((appointment) => {
+              {visible.map((appointment) => {
                 const service = services.find(s => s.id === appointment.service_id);
                 const location = locations.find(l => l.id === appointment.location_id);
                 
