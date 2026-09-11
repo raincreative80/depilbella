@@ -199,4 +199,12 @@ export const locations: Location[] = [
     mapsUrl: 'https://maps.google.com/?q=Matola+Mozal+N4',
     coordinates: { lat: -25.9620, lng: 32.4589 },
   },
+  {
+    id: 'vilanculos',
+    name: 'Vilanculos',
+    address: 'Vilanculos, Inhambane',
+    whatsapp: '{{WHATSAPP_VILANCULOS}}',
+    mapsUrl: 'https://maps.google.com/?q=Vilanculos+Inhambane',
+    coordinates: { lat: -22.0000, lng: 35.3167 },
+  },
 ];
