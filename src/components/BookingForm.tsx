@@ -85,7 +85,7 @@ export const BookingForm = ({ services, locations, translations, language }: Boo
 
       if (error) throw error;
 
-      const message = `Novo agendamento PelomenosMZ:%0A
+      const message = `Novo agendamento Depil Bella:%0A
 Cliente: ${formData.name}%0A
 Telefone: ${formData.phone}%0A
 Serviço: ${selectedService.name[language]}%0A

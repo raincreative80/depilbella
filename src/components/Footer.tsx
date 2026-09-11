@@ -13,7 +13,7 @@ export const Footer = ({ translations }: FooterProps) => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
           <div className="space-y-4">
-            <h3 className="text-2xl font-serif font-bold">PelomenosMZ</h3>
+            <h3 className="text-2xl font-serif font-bold">Depil Bella</h3>
             <p className="text-primary-foreground/80 text-sm leading-relaxed">
               {footer.tagline}
             </p>
@@ -51,7 +51,7 @@ export const Footer = ({ translations }: FooterProps) => {
         <div className="border-t border-primary-foreground/20 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-primary-foreground/70">
             <p>
-              © {currentYear} PelomenosMZ. {footer.rights}.
+              © {currentYear} Depil Bella. {footer.rights}.
             </p>
             <div className="flex gap-6">
               <a href="/admin" className="hover:text-primary-foreground transition-smooth">

@@ -90,7 +90,7 @@ const Auth = () => {
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-background via-cream to-background p-4">
       <Card className="w-full max-w-md shadow-elegant">
         <CardHeader className="space-y-1 text-center">
-          <CardTitle className="text-3xl font-serif">PelomenosMZ</CardTitle>
+          <CardTitle className="text-3xl font-serif">Depil Bella</CardTitle>
           <CardDescription>Pele suave, confiança renovada</CardDescription>
         </CardHeader>
         <CardContent>
